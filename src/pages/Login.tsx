@@ -6,7 +6,6 @@ import toast from "react-hot-toast";
 import PropTypes from 'prop-types';
 
 export default function Login({ setAuth }: { setAuth: (authStatus: boolean) => void }) {
-    const VITE_DATABASE_URL = import.meta.env.VITE_DATABASE_URL;
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -15,7 +14,7 @@ export default function Login({ setAuth }: { setAuth: (authStatus: boolean) => v
     const loginUser = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${VITE_DATABASE_URL}api/auth/login`, { email, password });
+            const response = await axios.post(`https://reforco-digital-backend.vercel.app/api/auth/login`, { email, password });
             localStorage.setItem('token', response.data.token);
             setAuth(true);
             navigate('/');

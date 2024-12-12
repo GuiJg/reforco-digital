@@ -5,7 +5,6 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 export default function Register() {
-    const VITE_DATABASE_URL = import.meta.env.VITE_DATABASE_URL;
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -15,7 +14,7 @@ export default function Register() {
     const registerUser = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            await axios.post(`${VITE_DATABASE_URL}api/auth/register`, { email, password });
+            await axios.post(`https://reforco-digital-backend.vercel.app/api/auth/register`, { email, password });
             toast.success(`Usuário registrado com sucesso`);
             navigate('/login');
         } catch (error) {
