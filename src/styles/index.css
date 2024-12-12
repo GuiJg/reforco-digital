@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@import '../../node_modules/primeicons/primeicons.css';
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    background: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0570DB;
+}
+
+header {
+    transition: all 0.3s ease-in-out;
+}
+
+.scrolled {
+    background: -webkit-linear-gradient(250deg,#003366 40%, #0066CC 150%);
+    backdrop-filter: blur(6px);
+    box-shadow: 1px 2px 5px 1px #00000040;
+    padding: 1rem 6rem;
+ }
