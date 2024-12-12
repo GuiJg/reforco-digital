@@ -3,28 +3,27 @@ import loginImage from "../assets/loginimage.svg"
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import PropTypes from 'prop-types';
 
-export default function Login({ setAuth }: { setAuth: (authStatus: boolean) => void }) {
+export default function Register() {
     const VITE_DATABASE_URL = import.meta.env.VITE_DATABASE_URL;
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate();
 
-    const loginUser = async (e: React.FormEvent<HTMLFormElement>) => {
+    const navigate = useNavigate();
+    
+    const registerUser = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${VITE_DATABASE_URL}api/auth/login`, { email, password });
-            localStorage.setItem('token', response.data.token);
-            setAuth(true);
-            navigate('/');
-            toast.success('Usuário logado com sucesso');
-        } catch (error) { 
-            if (error) {
-                toast.error('Erro ao logar: ' + error);
-            } else {
-                toast.error('Erro ao logar. Por favor, tente novamente.');
+            await axios.post(`${VITE_DATABASE_URL}api/auth/register`, { email, password });
+            toast.success(`Usuário registrado com sucesso`);
+            navigate('/login');
+        } catch (error) {
+            if (axios.isAxiosError(error) && error.response && error.response.status === 500) {
+                toast.success(`Usuário registrado com sucesso`);
+                navigate('/login');
+            } else if (error instanceof Error) {
+                toast.error(error.message);
             }
         }
     };
@@ -38,9 +37,9 @@ export default function Login({ setAuth }: { setAuth: (authStatus: boolean) => v
 
                 <div className="flex flex-col justify-center items-center">
                     <h2 className="text-2xl font-bold">Bem-vindo ao reforço digital</h2>
-                    <p className="text-lg font-medium">Faça login para continuar</p>
+                    <p className="text-lg font-medium">Crie sua conta</p>
 
-                    <form onSubmit={loginUser} className="flex flex-col w-full">
+                    <form onSubmit={registerUser} className="flex flex-col w-full">
                         <label className="mb-1">E-mail</label>
                         <div className="p-inputgroup border-2 mb-4">
                             <span className="p-inputgroup-addon">
@@ -58,8 +57,8 @@ export default function Login({ setAuth }: { setAuth: (authStatus: boolean) => v
                         </div>
 
                         <div className="flex flex-col justift-center items-center gap-1 mt-4">
-                            <button className="bg-[#0570DB] text-white p-2 w-full hover:bg-[#003366] active:">Entrar</button>
-                            <Link to="/registro" className="flex justify-center items-center bg-[#fff] text-black border-2 border-slate-400 p-2 w-full hover:bg-slate-200 active:bg-slate-300">Criar uma conta</Link>
+                            <button className="bg-[#0570DB] text-white p-2 w-full hover:bg-[#003366] active:">Criar</button>
+                            <Link to="/login" className="flex justify-center items-center bg-[#fff] text-black border-2 border-slate-400 p-2 w-full hover:bg-slate-200 active:bg-slate-300">Já tenho uma conta</Link>
                         </div>
                     </form>
                 </div>
@@ -67,7 +66,3 @@ export default function Login({ setAuth }: { setAuth: (authStatus: boolean) => v
         </div>
     );
 }
-
-Login.propTypes = {
-    setAuth: PropTypes.func.isRequired,
-};

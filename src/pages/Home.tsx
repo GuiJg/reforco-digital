@@ -1,6 +1,12 @@
 import { useState } from 'react';
 import '../styles/home.css'
+
 import bannerVideo from '../assets/banner-video.mp4'
+import portugues from "../assets/portugues.png"
+import matematica from "../assets/matematica.png"
+import fisica from "../assets/fisica.png"
+import quimica from "../assets/quimica.png"
+import historia from "../assets/historia.png"
 
 export default function Home() {
 
@@ -14,6 +20,14 @@ export default function Home() {
         {
             title: "Artigo 2",
             description: "Descrição do segundo artigo. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        },
+        {
+            title: "Artigo 3",
+            description: "Descrição do terceiro artigo. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."
+        },
+        {
+            title: "Artigo 3",
+            description: "Descrição do terceiro artigo. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."
         },
         {
             title: "Artigo 3",
@@ -56,7 +70,7 @@ export default function Home() {
                     </div>
                 </div>
             </div >
-            <div className="flex flex-col justify-center items-center mt-10 mb-10">
+            <div id='professor' className="flex flex-col justify-center items-center mt-10 mb-10">
                 <div className="flex flex-col justify-center items-center gap-1 mt-16 mb-10">
                     <h2 className='text-4xl font-bold'>Inicie seus estudos</h2>
                     <p className='text-center font-medium'>
@@ -84,7 +98,7 @@ export default function Home() {
                 </div>
                 <button type="button" className="bg-[#0570DB] text-white p-2 rounded mt-5 mb-10 w-48 pt-3 pb-3 hover:bg-[#0066CC] active:bg-[#0066ccd5]">Iniciar estudos</button>
             </div>
-            <div className="flex flex-col justify-center items-center mt-10 mb-10">
+            <div id='disciplina' className="flex flex-col justify-center items-center mt-10 mb-10">
                 <div className="flex flex-col justify-center items-center gap-1 mt-16 mb-10">
                     <h2 className='text-4xl font-bold'>Nossas disciplinas</h2>
                 </div>
@@ -120,28 +134,23 @@ export default function Home() {
                     quando e onde você precisar.
                 </p>
             </div>
-            <div className="flex flex-col justify-center items-center mb-24">
+            <div id='artigo' className="flex flex-col justify-center items-center mb-24">
                 <h2 className="text-3xl font-bold mb-8">Artigos</h2>
 
-                <div className="relative w-4/5 max-w-2xl">
+                <div className="relative max-w-sm">
                     <div className="overflow-hidden rounded-lg">
                         <div
-                            className="flex transition-transform duration-300 ease-in-out"
+                            className="flex justify-center items-center gap-5 transition-transform duration-300 ease-in-out"
                             style={{
-                                transform: `translateX(-${currentSlide * 33.33}%)`,
+                                transform: `translateX(-${currentSlide * 20}%)`,
                                 width: `${articles.length * 100}%`
                             }}
                         >
-                            {articles.map((article, index) => (
-                                <div
-                                    key={index}
-                                    className="bg-[#0066CC] text-white w-1/3 p-6 rounded-lg shadow-lg flex-shrink-0"
-                                    style={{ width: `${100 / articles.length}%` }}
-                                >
-                                    <h3 className="text-2xl font-semibold mb-4">{article.title}</h3>
-                                    <p>{article.description}</p>
-                                </div>
-                            ))}
+                            <img src={portugues} alt="" />
+                            <img src={matematica} alt="" />
+                            <img src={fisica} alt="" />
+                            <img src={quimica} alt="" />
+                            <img src={historia} alt="" />
                         </div>
                     </div>
 
@@ -149,13 +158,13 @@ export default function Home() {
                         onClick={prevSlide}
                         className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/20 rounded-full p-2 hover:bg-white/30"
                     >
-                        <i className="pi pi-angle-left text-white"></i>
+                        <i className="pi pi-angle-left text-black text-4xl" style={{ transform: 'translateX(-4rem)' }}></i>
                     </button>
                     <button
                         onClick={nextSlide}
                         className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/20 rounded-full p-2 hover:bg-white/30"
                     >
-                        <i className="pi pi-angle-right text-white"></i>
+                        <i className="pi pi-angle-right text-black text-4xl translate-x-10"></i>
                     </button>
 
                     <div className="flex justify-center mt-4">
@@ -164,8 +173,8 @@ export default function Home() {
                                 key={index}
                                 onClick={() => setCurrentSlide(index)}
                                 className={`h-2 w-2 rounded-full mx-1 ${currentSlide === index
-                                        ? 'bg-white'
-                                        : 'bg-white/50'
+                                    ? 'bg-black'
+                                    : 'bg-black/50'
                                     }`}
                             />
                         ))}
